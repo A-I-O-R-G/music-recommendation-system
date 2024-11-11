@@ -1,0 +1,48 @@
+
+```json
+{
+  "doc_Pre_Projeto": {
+    "titulo": "Projeto de Desenvolvimento de Sistema de Recomendação de Músicas",
+    "data": "2024-11-10",
+    "descricao": "Criação de um script em Python para um Sistema de Recomendação de músicas baseado em preferências dos usuários. O sistema capturará as preferências musicais e implementará um algoritmo de recomendação para gerar listas personalizadas.",
+    "objetivos": [
+      "Capturar as preferências musicais dos usuários, considerando gêneros, artistas, e playlists.",
+      "Implementar um algoritmo de recomendação, podendo ser filtragem colaborativa, filtragem por conteúdo ou uma combinação.",
+      "Utilizar bibliotecas de machine learning como Scikit-learn ou TensorFlow.",
+      "Permitir a inserção de novas músicas e atualização das preferências em tempo real.",
+      "Gerar uma lista de recomendações personalizadas para os usuários.",
+      "Fornecer uma interface simples para interação com o usuário.",
+      "Incluir documentação clara sobre a utilização do script.",
+      "Adicionar testes unitários para garantir o funcionamento esperado do sistema."
+    ],
+    "requisitos": {
+      "tecnologia": "Python",
+      "bibliotecas": [
+        "scikit-learn",
+        "tensorflow",
+        "pandas",
+        "numpy"
+      ],
+      "caracteristicas": [
+        "Sistema de recomendação dinâmico",
+        "Interface simples",
+        "Documentação abrangente",
+        "Testes unitários incluídos"
+      ]
+    },
+    "stakeholders": [
+      "Equipe de Desenvolvimento",
+      "Usuários do Sistema",
+      "Gerente de Projeto"
+    ],
+    "data_de_inicio": "2024-11-20",
+    "data_de_fim": "2025-01-30"
+  }
+}
+```
+
+```json
+{
+  "name_doc_Pre_Projeto": "Documento Pre-Projeto: Sistema de Recomendação de Músicas"
+}
+```

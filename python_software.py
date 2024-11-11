@@ -1,78 +1,79 @@
 import random
+import json
 
 class MusicRecommendationSystem:
     def __init__(self):
         """
-        Inicializa o sistema de recomendaÃ§Ã£o com um dicionÃ¡rio de usuÃ¡rios e suas preferÃªncias.
+        Inicializa o sistema de recomendação com um dicionário de usuários e suas preferências.
         """
         self.user_preferences = {}
 
     def capture_preferences(self, user_id, genres, artists, playlists):
-        """
-        Captura as preferÃªncias musicais do usuÃ¡rio.
-        :param user_id: Identificador Ãºnico do usuÃ¡rio.
-        :param genres: Lista de gÃªneros preferidos.
-        :param artists: Lista de artistas preferidos.
-        :param playlists: Lista de playlists favoritas.
-        """
+        """Captura as preferências musicais do usuário."""
         self.user_preferences[user_id] = {
             'genres': genres,
             'artists': artists,
             'playlists': playlists
         }
-        print(f"PreferÃªncias do usuÃ¡rio {user_id} capturadas com sucesso.")
+        print(f"Preferências do usuário '{user_id}' capturadas com sucesso.")
 
     def update_preferences(self, user_id, genres, artists, playlists):
-        """
-        Atualiza as preferÃªncias musicais do usuÃ¡rio.
-        :param user_id: Identificador Ãºnico do usuÃ¡rio.
-        :param genres: Lista de gÃªneros preferidos.
-        :param artists: Lista de artistas preferidos.
-        :param playlists: Lista de playlists favoritas.
-        """
+        """Atualiza as preferências musicais do usuário."""
         if user_id in self.user_preferences:
             self.user_preferences[user_id] = {
                 'genres': genres,
                 'artists': artists,
                 'playlists': playlists
             }
-            print(f"PreferÃªncias do usuÃ¡rio {user_id} atualizadas com sucesso.")
+            print(f"Preferências do usuário '{user_id}' atualizadas com sucesso.")
         else:
-            print("UsuÃ¡rio nÃ£o encontrado. As preferÃªncias nÃ£o foram atualizadas.")
+            print(f"Usuário '{user_id}' não encontrado. As preferências não foram atualizadas.")
 
-    def recommend_music(self, user_id):
-        """
-        Gera recomendaÃ§Ãµes de mÃºsicas para o usuÃ¡rio baseado nas suas preferÃªncias.
-        :param user_id: Identificador Ãºnico do usuÃ¡rio.
-        :return: Lista de recomendaÃ§Ãµes.
-        """
+    def recommend_music(self, user_id, num_recommendations=5):
+        """Gera recomendações de músicas para o usuário baseado nas suas preferências."""
         if user_id not in self.user_preferences:
-            print("UsuÃ¡rio nÃ£o encontrado. NÃ£o Ã© possÃ­vel gerar recomendaÃ§Ãµes.")
+            print(f"Usuário '{user_id}' não encontrado. Não é possível gerar recomendações.")
             return []
 
         preferences = self.user_preferences[user_id]
         recommendations = []
 
+        # Gerar recomendações baseadas nos gêneros, artistas e playlists
         for genre in preferences['genres']:
-            recommendations.append(f"MÃºsica AleatÃ³ria no gÃªnero {genre}")
+            recommendations.append(f"Música Aleatória no gênero {genre}")
         for artist in preferences['artists']:
-            recommendations.append(f"MÃºsica de {artist}")
+            recommendations.append(f"Música de {artist}")
         for playlist in preferences['playlists']:
-            recommendations.append(f"MÃºsica da playlist {playlist}")
+            recommendations.append(f"Música da playlist {playlist}")
 
-        random.shuffle(recommendations)  
-        return recommendations[:5]  
+        random.shuffle(recommendations)
+        return recommendations[:num_recommendations]
 
     def display_recommendations(self, user_id):
-        """
-        Exibe as recomendaÃ§Ãµes de mÃºsicas para o usuÃ¡rio.
-        :param user_id: Identificador Ãºnico do usuÃ¡rio.
-        """
+        """Exibe as recomendações de músicas para o usuário."""
         recommendations = self.recommend_music(user_id)
         if recommendations:
-            print(f"RecomendaÃ§Ãµes para o usuÃ¡rio {user_id}:")
+            print(f"Recomendações para o usuário '{user_id}':")
             for music in recommendations:
                 print(f"- {music}")
+
+    def save_preferences(self, filename):
+        """Salva as preferências dos usuários em um arquivo JSON."""
+        try:
+            with open(filename, 'w') as f:
+                json.dump(self.user_preferences, f, indent=4)
+            print(f"Preferências salvas em '{filename}'.")
+        except Exception as e:
+            print(f"Erro ao salvar preferências: {e}")
+
+    def load_preferences(self, filename):
+        """Carrega as preferências dos usuários de um arquivo JSON."""
+        try:
+            with open(filename, 'r') as f:
+                self.user_preferences = json.load(f)
+            print(f"Preferências carregadas de '{filename}'.")
+        except Exception as e:
+            print(f"Erro ao carregar preferências: {e}")
 
 if __name__ == "__main__":
     music_system = MusicRecommendationSystem()
@@ -80,3 +81,5 @@ if __name__ == "__main__":
     music_system.display_recommendations(user_id="user1")
     music_system.update_preferences(user_id="user1", genres=["Jazz"], artists=["Artist C"], playlists=["Playlist 2"])
     music_system.display_recommendations(user_id="user1")
+    music_system.save_preferences("preferencias.json")
+    music_system.load_preferences("preferencias.json")
